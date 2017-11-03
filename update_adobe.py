@@ -27,17 +27,14 @@ for filename in os.listdir("/Applications"):
 
 if channel_ids:
     channel_ids_arg = "--channelIds=\"" + ",".join(channel_ids) + "\""
-    command = ["RemoteUpdateManager", channel_ids_arg]
+    command = ["sudo", "RemoteUpdateManager", channel_ids_arg]
 
     print("Attempting to update")
     print(", ".join(adobe_apps) + "\n")
     print("Running command")
     print(" ".join(command) + "\n")
 
-    try:
-        subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
-    except subprocess.CalledProcessError as e:
-        print("Process returned with error (code {}): {}".format(e.returncode, e.output))
+    subprocess.call(command)
 else:
     print("No Adobe Apps found")
 
